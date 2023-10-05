@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_manager/models/client.dart';
+import 'package:instagram_manager/repositories/clients_repository.dart';
+import 'package:instagram_manager/utils/functions/create_snackbar.dart';
+import 'package:instagram_manager/widgets/clients_list.dart';
 import 'package:instagram_manager/widgets/styled_title.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,21 +13,62 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Client> clients = [];
+  final ClientsRepository repository = ClientsRepository();
+
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-        child: Scaffold(
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              StyledTitle(),
-            ],
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const StyledTitle(),
+                ClientsList(
+                  clients: clients,
+                  onDelete: onDelete,
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
+  }
+
+  void onDelete(Client client) {
+    int index = clients.indexOf(client);
+
+    setState(() => clients.remove(client));
+    repository.saveClientsList(clients);
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      createSnackBar(index: index, client: client, restoreOne: restoreClient),
+    );
+  }
+
+  void restoreClient(int index, Client client) {
+    setState(() => clients.insert(index, client));
+    repository.saveClientsList(clients);
+  }
+
+  void deletAll() {
+    List<Client> backup = List<Client>.of(clients);
+    setState(() => clients.clear());
+    repository.saveClientsList(clients);
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      createSnackBar(backup: backup, restoreAll: restoreAllClients, all: true),
+    );
+  }
+
+  void restoreAllClients(List<Client> backup) {
+    setState(() => clients.addAll(backup));
+    repository.saveClientsList(clients);
   }
 }
