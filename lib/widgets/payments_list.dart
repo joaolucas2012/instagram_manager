@@ -13,14 +13,16 @@ class PaymentsList extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.2,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           const Text("Pagamentos:"),
-          ListView(
-            shrinkWrap: true,
-            children: [
-              for (DateTime date in client.payments) DateListItem(date: date),
-            ],
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.15,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                for (DateTime date in client.payments) DateListItem(date: date),
+              ],
+            ),
           ),
         ],
       ),

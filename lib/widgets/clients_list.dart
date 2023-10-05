@@ -19,7 +19,7 @@ class ClientsList extends StatefulWidget {
 class _ClientsListState extends State<ClientsList> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: MediaQuery.of(context).size.height * 0.5,
       child: Padding(
         padding: EdgeInsets.symmetric(
