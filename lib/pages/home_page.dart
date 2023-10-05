@@ -3,7 +3,10 @@ import 'package:instagram_manager/models/client.dart';
 import 'package:instagram_manager/repositories/clients_repository.dart';
 import 'package:instagram_manager/store/corestore.dart';
 import 'package:instagram_manager/utils/functions/create_snackbar.dart';
+import 'package:instagram_manager/widgets/button.dart';
 import 'package:instagram_manager/widgets/clients_list.dart';
+import 'package:instagram_manager/widgets/options_list.dart';
+import 'package:instagram_manager/widgets/styled_divider.dart';
 import 'package:instagram_manager/widgets/styled_title.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,11 +31,21 @@ class _HomePageState extends State<HomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const StyledTitle(),
-                ClientsList(
-                  clients: clients,
-                  onDelete: onDelete,
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const OptionsList(),
+                      const StyledDivider(scalePercentage: 0.03),
+                      ClientsList(clients: clients, onDelete: onDelete),
+                      const Button(title: "Adicionar"),
+                    ],
+                  ),
                 ),
-                ElevatedButton(onPressed: () {}, child: const Text("Adicionar"))
               ],
             ),
           ),

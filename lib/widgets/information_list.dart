@@ -31,10 +31,15 @@ class InformationList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StyledText(text: "Nome da conta: ${client.accountName}"),
                     StyledText(
-                        text: "Senha da conta: ${client.accountPassword}"),
-                    StyledText(text: "Contato: ${client.contact}"),
+                      text: "Nome da conta: ${client.accountName}",
+                    ),
+                    StyledText(
+                      text: "Senha da conta: ${client.accountPassword}",
+                    ),
+                    StyledText(
+                      text: "Contato: ${client.contact}",
+                    ),
                     StyledText(
                       text: "Data de início: ${formatDate(client.initialDate)}",
                     ),

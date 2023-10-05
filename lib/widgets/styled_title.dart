@@ -5,12 +5,16 @@ class StyledTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Instagram Manager',
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 25,
-        fontWeight: FontWeight.bold,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.02),
+      child: const Text(
+        'Instagram Manager',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
