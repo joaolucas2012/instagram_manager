@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_manager/models/client.dart';
 import 'package:instagram_manager/repositories/clients_repository.dart';
+import 'package:instagram_manager/store/corestore.dart';
 import 'package:instagram_manager/utils/functions/create_snackbar.dart';
 import 'package:instagram_manager/widgets/clients_list.dart';
 import 'package:instagram_manager/widgets/styled_title.dart';
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Client> clients = [];
+  List<Client> clients = List<Client>.of(CoreStore.clients);
   final ClientsRepository repository = ClientsRepository();
 
   @override
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
                   clients: clients,
                   onDelete: onDelete,
                 ),
+                ElevatedButton(onPressed: () {}, child: const Text("Adicionar"))
               ],
             ),
           ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_manager/models/client.dart';
+import 'package:instagram_manager/utils/functions/format_contact.dart';
+import 'package:instagram_manager/utils/functions/format_date.dart';
+import 'package:instagram_manager/utils/functions/show_popup.dart';
 
 class ClientListItem extends StatelessWidget {
   final Client client;
@@ -26,15 +29,18 @@ class ClientListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                client.accountName,
+                "${client.name} - ${formatDate(client.initialDate)}",
                 style: const TextStyle(fontSize: 12),
               ),
               const SizedBox(height: 7),
-              Text(
-                client.initialDate.toIso8601String(),
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () async => await showPopup(context, client),
+                child: Text(
+                  "${client.accountName} - ${formatContact(client.contact)}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

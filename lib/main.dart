@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_manager/pages/home_page.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
 }
 

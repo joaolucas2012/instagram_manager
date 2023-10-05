@@ -20,13 +20,19 @@ class _ClientsListState extends State<ClientsList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          for (Client client in widget.clients)
-            ClientListItem(client: client, onDelete: widget.onDelete),
-        ],
+      height: MediaQuery.of(context).size.height * 0.5,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.04,
+          horizontal: MediaQuery.of(context).size.height * 0.01,
+        ),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            for (Client client in widget.clients)
+              ClientListItem(client: client, onDelete: widget.onDelete),
+          ],
+        ),
       ),
     );
   }
